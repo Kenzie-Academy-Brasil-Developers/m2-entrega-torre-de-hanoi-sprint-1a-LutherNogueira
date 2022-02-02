@@ -6,8 +6,13 @@ Use a propriedade DOM lastElementChild para saber qual é o disco no topo da tor
 Use o método DOM appendChild() para adicionar um disco a uma torre . Observe que quando você usa appendChild em um elemento que já tem um pai, ele é automaticamente removido do pai anterior e adicionado no novo.
 Use a propriedade Element.clientWidth para pegar o tamanho dos discos.
 */
-const towerColumn = document.querySelector(".towerColumn")
-towerColumn.addEventListener("click", moveDisc)
+const initTower = document.querySelector(".towerContainer");
+initTower.addEventListener("click", holdDisc);
+
+const targetTower = document.querySelector(".towerContainer");
+targetTower.addEventListener("click", moveDisc);
+
+
 
 
 /* 
@@ -19,10 +24,20 @@ transferir disco capturado
 */
 
 
-function moveDisc(fromTower,toTower){
-    console.log(event.currentTarget);
+function holdDisc(tower,event){
+    let initTower = event.target;
+    console.log(targetTower)
+    return initTower;
+}
+
+function moveDisc(event){
+
+    if(holdDisc !== null){
+        let targetTower = event.target;
+        console.log(targetTower)
+        //document.getElementById(initTower).appendChild(targetTower);
+    }
     
-    //document.getElementById(fromTower).appendChild(toTower);
 
 }
 
