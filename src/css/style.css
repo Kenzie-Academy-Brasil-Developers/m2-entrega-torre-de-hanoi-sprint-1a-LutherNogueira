@@ -1,0 +1,46 @@
+/* MAIN */
+
+ul{
+    list-style-type: none;
+
+    display: flex; 
+    flex-direction: row; 
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10%;
+    width:  856px;
+}
+
+li{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+}
+.towerColumn{
+    width: 30px;
+    height: 300px;
+
+    background: #454545;
+
+    margin: 0 100px 0 100px;
+
+    
+}
+
+.disc{
+    height: 50px;
+    width: 160px;
+
+    background: blueviolet;
+
+    border-radius: 15px;
+}
+
+.container{
+    
+}
