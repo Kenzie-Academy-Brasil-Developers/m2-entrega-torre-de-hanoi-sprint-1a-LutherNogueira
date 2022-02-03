@@ -6,16 +6,34 @@ Use a propriedade DOM lastElementChild para saber qual é o disco no topo da tor
 Use o método DOM appendChild() para adicionar um disco a uma torre . Observe que quando você usa appendChild em um elemento que já tem um pai, ele é automaticamente removido do pai anterior e adicionado no novo.
 Use a propriedade Element.clientWidth para pegar o tamanho dos discos.
 */
-const initTower = document.querySelector(".towerContainer");
-initTower.addEventListener("click", holdDisc);
 
-const targetTower = document.querySelector(".towerContainer");
-targetTower.addEventListener("click", moveDisc);
+/* LISTENERS */
+const selectTower = document.querySelector(".towerContainer");
+selectTower.addEventListener("click", holdDisc);
+
+let topDisc = null
+
+/* FUNÇÕES DE CRIAÇÂO 
+criar torres classe .towerColumn
+criar discos classe .disc
+*/
+
+function createDisc()
+{
 
 
+}
 
+function createTowers()
+{
 
-/* 
+}
+
+createTowers()
+
+/*
+FUNÇÕES DE MOVIMENTO
+
 Selecionar a torre
 capturar o primeiro disco da torre
 
@@ -24,38 +42,24 @@ transferir disco capturado
 */
 
 
-function holdDisc(tower,event){
-    let initTower = event.target;
-    console.log(targetTower)
-    return initTower;
-}
+function holdDisc(event){
+    let holdTarget = event.target.closest(".towerColumn");
+    console.log(holdTarget)
 
-function moveDisc(event){
-
-    if(holdDisc !== null){
-        let targetTower = event.target;
-        console.log(targetTower)
-        //document.getElementById(initTower).appendChild(targetTower);
+    if(topDisc===null){
+        topDisc = holdTarget.lastElementChild
     }
-    
+    else{
+        holdTarget.appendChild(topDisc)
+        topDisc = null
+    }
 
 }
 
-function verifyTower(tower){
-    
-    //Use a propriedade DOM childElementCount para saber quantos discos estão em uma torre.
-}
 
-function reset(){
-    const btnReset  = event.target
-}
 
-function createDisc(dificulty)
-{
-   // document.createElement
-   // document.getElementsByClassName('disc').style
 
-}
+
 
 
 /* BONUS
@@ -65,4 +69,10 @@ Função Reset: Crie uma função (um botão na aplicação) que reseta todos os
 Mensagem de vitória: Crie uma função que quando um jogador ganhar apareça uma mensagem na tela demostrando quando completar o objetivo. Não usar Alert.
 Níveis de dificuldade: Crie um seletor de dificuldade, do mais básico (3 discos) até onde preferir, aconselhamos até no máximo 5 discos.
 
+const btnReset = document.querySelector(".btnReset");
+btnReset.addEventListener("click", reset)
+
+function reset(){
+    
+}
 */
