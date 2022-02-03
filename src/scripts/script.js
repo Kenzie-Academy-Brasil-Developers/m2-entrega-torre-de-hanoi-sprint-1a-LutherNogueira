@@ -13,12 +13,12 @@ selectTower.addEventListener("click", holdDisc);
 
 const thirdTower = document.getElementById("tower2");
 
-
 let holdedDisc = null
 
 /* FUNÇÕES DE CRIAÇÂO 
 criar torres classe .towerColumn
 criar discos classe .disc
+aumentar o width dos discos conforme quantidade
 */
 function createDisc(level)
 {
@@ -50,7 +50,7 @@ function createTowers()
     }
 }
 createTowers()
-createDisc(5)
+createDisc(3)
 /*
 FUNÇÕES DE MOVIMENTO
 
@@ -72,11 +72,10 @@ function holdDisc(event){
     else if(clickedTarget.childElementCount === 0 || holdedDisc.clientWidth < clickedTarget.lastElementChild.clientWidth){
         clickedTarget.appendChild(holdedDisc)
         holdedDisc = null
+        console.log(holdedDisc)
     }
 
-    if(thirdTower.childElementCount === 3){
-        console.log("Todos os discos estão na ultima torre") 
-    }
+    //verifyTower()
 }
 
 function verifyTower(){
@@ -88,10 +87,6 @@ function verifyTower(){
 function userMsg(){
 
 }
-
-
-
-
 
 
 
