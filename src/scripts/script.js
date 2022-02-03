@@ -7,50 +7,70 @@ Use o método DOM appendChild() para adicionar um disco a uma torre . Observe qu
 Use a propriedade Element.clientWidth para pegar o tamanho dos discos.
 */
 
-/* LISTENERS */
-const selectTower = document.querySelector(".towerContainer");
-selectTower.addEventListener("click", holdDisc);
-
-const thirdTower = document.getElementById("tower2");
 
 let holdedDisc = null
+let levelDificult = null
 
 /* FUNÇÕES DE CRIAÇÂO 
 criar torres classe .towerColumn
 criar discos classe .disc
 aumentar o width dos discos conforme quantidade
+mudar a cor dos discos conforme quantidade
 */
 function createDisc(level)
 {
+    reset()
+
     const firstTower = document.getElementById("tower0");
+
     let width = 220
-    let discWidth = `${width}px`
+    let colorR = 100
+    let colorG = 0
+
+    firstTower.innerHTML = '';
+
+    const str = 'Clique na torre com o disco que deseja mover, depois na torre destino'
+    userMsg(str)
+
+    levelDificult = level
+
     for(let i = 0;i<level;i++){
         const newDisc = document.createElement("div")
+
         newDisc.classList.add("disc")
         newDisc.id = "disc"+i
-        discWidth = `${width}px`
-        console.log(discWidth)
+
+        let discWidth = `${width}px`
+        let discColor = `rgb(${colorR}, ${colorG}, 255)`
+
         newDisc.style.width = discWidth
+        newDisc.style.background = discColor
+
         firstTower.appendChild(newDisc)
+
         width -= 20
+        colorR += 20
+        colorG += 50
     }
 }
 
 function createTowers()
 {
     const towerContainer = document.querySelector(".towerContainer")
-    
+
     for(let i = 0;i<3;i++){
         const newTower = document.createElement("div")
         newTower.classList.add("towerColumn")
         newTower.id = "tower"+i
         towerContainer.appendChild(newTower)
-        const barras = document.querySelectorAll(".torre")          
+        newTower.addEventListener("click", holdDisc);            
     }
+
+    
 }
 createTowers()
-createDisc(3)
+
+
 /*
 FUNÇÕES DE MOVIMENTO
 
@@ -63,31 +83,37 @@ transferir disco capturado
 
 
 function holdDisc(event){
-    let clickedTarget = event.target.closest(".towerColumn");
+    let clickedTarget = event.target.closest(".towerColumn")
+
+    const thirdTower = document.getElementById("tower2")
 
     if(holdedDisc===null){
         holdedDisc = clickedTarget.lastElementChild
-        console.log("hold " + holdedDisc.clientWidth)
     }
     else if(clickedTarget.childElementCount === 0 || holdedDisc.clientWidth < clickedTarget.lastElementChild.clientWidth){
         clickedTarget.appendChild(holdedDisc)
         holdedDisc = null
-        console.log(holdedDisc)
     }
-
-    //verifyTower()
-}
-
-function verifyTower(){
-    if(thirdTower.childElementCount === 3){
-        console.log("Todos os discos estão na ultima torre")        
+    if(thirdTower.childElementCount === levelDificult){
+        const msg = 'Parabéns!!! Você resolveu a Torre de Hanoi!'
+        userMsg(msg)
     }
 }
 
-function userMsg(){
 
+function createMsg(){
+    const spanMsg = document.querySelector(".sectionMsg")
+    const newMsg = document.createElement("span")
+    newMsg.classList.add("spanMsg")
+    spanMsg.appendChild(newMsg)
 }
+createMsg()
+userMsg('Escolha a Dificuldade')
 
+function userMsg(msg){
+    const newMsg = document.querySelector(".spanMsg")
+    newMsg.innerText = msg
+}
 
 
 /* BONUS
@@ -96,11 +122,20 @@ Contador de movimentos: Crie um contador que demostras quantas vezes o jogador m
 Função Reset: Crie uma função (um botão na aplicação) que reseta todos os dados, ou seja, trazer todos os dados do jogo para o início. Lembrando que resetar os dados diferem de dar reload na página. Não use reload.
 Mensagem de vitória: Crie uma função que quando um jogador ganhar apareça uma mensagem na tela demostrando quando completar o objetivo. Não usar Alert.
 Níveis de dificuldade: Crie um seletor de dificuldade, do mais básico (3 discos) até onde preferir, aconselhamos até no máximo 5 discos.
-
-const btnReset = document.querySelector(".btnReset");
-btnReset.addEventListener("click", reset)
+*/
 
 function reset(){
-    
+    //const reset = document.querySelector(".towerColumn")
+    //console.log(reset)
+    //reset.innerText = '';
+    const thirdTower = document.getElementById("tower2")
+    const secondTower = document.getElementById("tower1")
+    const firstTower = document.getElementById("tower0")
+    thirdTower.innerText = '';
+    secondTower.innerText = '';
+    firstTower.innerText = '';
+
+    const str = 'Escolha a Dificuldade'
+    userMsg(str)
+
 }
-*/
