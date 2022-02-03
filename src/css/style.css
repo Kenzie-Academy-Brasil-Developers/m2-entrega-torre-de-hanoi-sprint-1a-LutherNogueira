@@ -29,8 +29,21 @@
 .disc{
     height: 50px;
     width: 160px;
-
+    
     background: blueviolet;
 
     border-radius: 15px;
+}
+
+.disc1{
+    width: 200px;
+}
+
+.disc2{
+    width: 180px;
+
+}
+
+.disc3{
+    width: 160px;
 }

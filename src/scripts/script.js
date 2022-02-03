@@ -11,26 +11,46 @@ Use a propriedade Element.clientWidth para pegar o tamanho dos discos.
 const selectTower = document.querySelector(".towerContainer");
 selectTower.addEventListener("click", holdDisc);
 
-let topDisc = null
+const thirdTower = document.getElementById("tower2");
+
+
+let holdedDisc = null
 
 /* FUNÇÕES DE CRIAÇÂO 
 criar torres classe .towerColumn
 criar discos classe .disc
 */
-
-function createDisc()
+function createDisc(level)
 {
-
-
+    const firstTower = document.getElementById("tower0");
+    let width = 220
+    let discWidth = `${width}px`
+    for(let i = 0;i<level;i++){
+        const newDisc = document.createElement("div")
+        newDisc.classList.add("disc")
+        newDisc.id = "disc"+i
+        discWidth = `${width}px`
+        console.log(discWidth)
+        newDisc.style.width = discWidth
+        firstTower.appendChild(newDisc)
+        width -= 20
+    }
 }
 
 function createTowers()
 {
-
+    const towerContainer = document.querySelector(".towerContainer")
+    
+    for(let i = 0;i<3;i++){
+        const newTower = document.createElement("div")
+        newTower.classList.add("towerColumn")
+        newTower.id = "tower"+i
+        towerContainer.appendChild(newTower)
+        const barras = document.querySelectorAll(".torre")          
+    }
 }
-
 createTowers()
-
+createDisc(5)
 /*
 FUNÇÕES DE MOVIMENTO
 
@@ -43,16 +63,29 @@ transferir disco capturado
 
 
 function holdDisc(event){
-    let holdTarget = event.target.closest(".towerColumn");
-    console.log(holdTarget)
+    let clickedTarget = event.target.closest(".towerColumn");
 
-    if(topDisc===null){
-        topDisc = holdTarget.lastElementChild
+    if(holdedDisc===null){
+        holdedDisc = clickedTarget.lastElementChild
+        console.log("hold " + holdedDisc.clientWidth)
     }
-    else{
-        holdTarget.appendChild(topDisc)
-        topDisc = null
+    else if(clickedTarget.childElementCount === 0 || holdedDisc.clientWidth < clickedTarget.lastElementChild.clientWidth){
+        clickedTarget.appendChild(holdedDisc)
+        holdedDisc = null
     }
+
+    if(thirdTower.childElementCount === 3){
+        console.log("Todos os discos estão na ultima torre") 
+    }
+}
+
+function verifyTower(){
+    if(thirdTower.childElementCount === 3){
+        console.log("Todos os discos estão na ultima torre")        
+    }
+}
+
+function userMsg(){
 
 }
 
