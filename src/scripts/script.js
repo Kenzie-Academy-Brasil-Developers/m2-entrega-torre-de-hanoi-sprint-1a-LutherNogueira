@@ -83,16 +83,16 @@ transferir disco capturado
 
 
 function holdDisc(event){
-    let clickedTarget = event.target.closest(".towerColumn")
+    let clickedTarget = event.target.closest(".towerColumn") //aticiona o elemento mais proximo do clique que tenha a classe .towerColumn
 
-    const thirdTower = document.getElementById("tower2")
+    const thirdTower = document.getElementById("tower2") //verificar condição de vitória da terceira torre
 
-    if(holdedDisc===null){
-        holdedDisc = clickedTarget.lastElementChild
+    if(holdedDisc===null){ // Se variavel que "segura" o disco está vazia
+        holdedDisc = clickedTarget.lastElementChild //"recebe" o ultimo elemento que está na torre
     }
-    else if(clickedTarget.childElementCount === 0 || holdedDisc.clientWidth < clickedTarget.lastElementChild.clientWidth){
-        clickedTarget.appendChild(holdedDisc)
-        holdedDisc = null
+    else if(clickedTarget.childElementCount === 0 || holdedDisc.clientWidth < clickedTarget.lastElementChild.clientWidth){ //Se não houver disco na torre ou o disco for menor que o da variavel
+        clickedTarget.appendChild(holdedDisc) //coloca o disco na torre
+        holdedDisc = null // muda a variavel para vaiz
     }
     if(thirdTower.childElementCount === levelDificult){
         const msg = 'Parabéns!!! Você resolveu a Torre de Hanoi!'
@@ -117,7 +117,6 @@ function userMsg(msg){
 
 
 /* BONUS
-
 Contador de movimentos: Crie um contador que demostras quantas vezes o jogador mudou o disco de torre
 Função Reset: Crie uma função (um botão na aplicação) que reseta todos os dados, ou seja, trazer todos os dados do jogo para o início. Lembrando que resetar os dados diferem de dar reload na página. Não use reload.
 Mensagem de vitória: Crie uma função que quando um jogador ganhar apareça uma mensagem na tela demostrando quando completar o objetivo. Não usar Alert.
